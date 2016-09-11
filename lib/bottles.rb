@@ -1,14 +1,24 @@
 class Bottles
+  def song
+    verses(99, 0)
+  end
+
   def verse(number_of_bottles)
-    if number_of_bottles == 0
+    case number_of_bottles
+    when 0
 <<-VERSE
 No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
 VERSE
+    when 1
+<<-VERSE
+1 bottle of beer on the wall, 1 bottle of beer.
+Take it down and pass it around, no more bottles of beer on the wall.
+VERSE
     else
 <<-VERSE
-#{number_of_bottles} #{bottle_pluralization(number_of_bottles)} of beer on the wall, #{number_of_bottles} #{bottle_pluralization(number_of_bottles)} of beer.
-Take #{after_pass_first(number_of_bottles - 1)} down and pass it around,#{after_pass(number_of_bottles - 1)}#{bottle_pluralization(number_of_bottles - 1)} of beer on the wall.
+#{number_of_bottles} bottles of beer on the wall, #{number_of_bottles} bottles of beer.
+Take one down and pass it around, #{number_of_bottles - 1} #{container(number_of_bottles - 1)} of beer on the wall.
 VERSE
     end
   end
@@ -23,27 +33,11 @@ VERSE
 
   private
 
-  def after_pass_first(number)
-    if number == 0
-      "it"
+  def container(number)
+    if number == 1
+      "bottle"
     else
-      "one"
-    end
-  end
-
-  def after_pass(number)
-    if number == 0
-      " "
-    else
-      " #{number} "
-    end
-  end
-
-  def bottle_pluralization(number)
-    case number
-    when 1 then "bottle"
-    when 0 then "no more bottles"
-    else "bottles"
+      "bottles"
     end
   end
 end
